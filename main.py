@@ -1,6 +1,14 @@
 from tkinter import *
 
-janela = Tk()
+def cadastroTecnico():
+    janela = Tk()
+    janela.minsize(500,350)
 
-bot = Button(master=janela, text="SAIR", command=janela.destroy)
-janela.mainloop()
+    imagem = PhotoImage(file="ferramentas.png")
+
+    button_ferramenta = Button(janela, image=imagem)
+
+    button_ferramenta.pack(pady=20)
+
+    janela.mainloop()
+cadastroTecnico()
