@@ -1,48 +1,79 @@
 from tkinter import *
-
-def cmd_ferramentas():
-    jan_ferramentaria = Tk()
-    jan_ferramentaria.minsize(550, 400)
-    jan_ferramentaria.maxsize(550, 400)
-    texto = Label(jan_ferramentaria, text="FERRAMENTAS", font="Arial 20")
-    texto.pack()
-    jan_ferramentaria.mainloop()
-def cmd_tecnicos():
-    jan_tecnicos = Tk()
-    jan_tecnicos.minsize(550, 400)
-    jan_tecnicos.maxsize(550, 400)
-    texto = Label(jan_tecnicos, text="TECNICOS", font="Arial 20")
-    texto.pack()
-    jan_tecnicos.mainloop()
-
-def menuinicial():
-    m_window = Tk()
-    m_window.minsize(550, 400)
-    m_window.maxsize(550, 400)
-    m_window.title("FERRAMENTARIA - Menu Principal   v.1")
-
-    #TEXTOS:
-    text_titulo = Label(m_window, text="FERRAMENTARIA", font="Arial 18", borderwidth=2, relief="solid", pady=5, padx=5)
-    text_titulo.grid(row=1, column=1, columnspan=2, padx=8, pady=5)
-    text_selecione = Label(m_window, text="Escolha sua Opção:", font="Arial 14")
-    text_selecione.grid(row=2, column=0, pady=40,rowspan=2)
-    text_tecnicos = Label(m_window, text="Técnicos")
-    text_tecnicos.grid(row=6, column=1)
-    text_ferramentas = Label(m_window, text="Ferramentas")
-    text_ferramentas.grid(row=6,column=2)
-
-    #botões:
-    img_fer = PhotoImage(file="ferramentas.png")
-    img_tec = PhotoImage(file= "tecnico.png")
-
-    b_ferramentas = Button(m_window, image=img_fer, command=cmd_ferramentas)
-    b_tecnicos = Button(m_window, image=img_tec, command=cmd_tecnicos)
-    b_tecnicos.grid(row=5,column=1)
-    b_ferramentas.grid(row=5, column=2)
+import posiciona
 
 
 
 
-    m_window.mainloop()
+class Aplication():
+    def __init__(self):
+        self.master = Tk()
+        self.master.bind('<Button-1>', posiciona.inicio_place)
+        self.master.bind('<ButtonRelease-1>', lambda arg: posiciona.fim_place(arg, self.master))
+        self.master.bind('<Button-2>', lambda arg: posiciona.para_geometry(self.master))
 
-menuinicial()
+        self.master.geometry("800x600")
+        self.master.resizable(False, False)
+        self.tela_inicial()
+
+
+
+
+    def tela_inicial(self):
+        #Archives Imports:
+        frame1 = Frame(self.master)
+        frame1.place(relx=0, rely=0, relwidth=1, relheight=1)
+        #Carregando imagens:
+        img_fundo = PhotoImage(file="imagens\\tela_inicial.png")
+        img_bot_ferramenta = PhotoImage(file="imagens\\bot_ferramenta.png")
+        img_bot_tecnico = PhotoImage(file="imagens\\bot_tecnico.png")
+        img_bot_reserva = PhotoImage(file="imagens\\bot_reserva.png")
+        lab_fundo = Label(frame1, image=img_fundo)
+        lab_fundo.pack()
+
+        bot_tecnico = Button(frame1, image=img_bot_tecnico, bd=2, command=self.tela_tecnico)
+        bot_tecnico.place(width=167, height=167, x=201, y=381)
+
+        bot_ferramenta = Button(frame1, image=img_bot_ferramenta, bd=2, command=self.tela_ferramenta)
+        bot_ferramenta.place(width=167, height=167, x=400, y=381)
+
+        bot_reserva = Button(frame1, image=img_bot_reserva)
+        bot_reserva.place(width=167, height=167, x=597, y=381)
+
+        self.master.mainloop()
+
+    def tela_ferramenta(self):
+        frame1 = Frame(self.master)
+        frame1.place(relx=0, rely=0, relwidth=1, relheight=1)
+        #carregamento das iagens:
+        img_fundo = PhotoImage(file="imagens\\tela_ferramentas.png")
+        img_voltar = PhotoImage(file="imagens\\bot_return.png")
+        img_add = PhotoImage(file="imagens\\bot_add.png")
+        img_del = PhotoImage(file="imagens\\bot_excluir.png")
+
+
+        lab_fundo = Label(frame1, image=img_fundo)
+        lab_fundo.pack()
+
+        bot_return = Button(frame1, image=img_voltar, command=self.tela_inicial)
+        bot_return.place(width=150, height=50, x=564, y=221)
+        self.master.mainloop()
+
+    def tela_tecnico(self):
+        frame1 = Frame(self.master)
+        frame1.place(relx=0, rely=0, relwidth=1, relheight=1)
+        #carregamento das iagens:
+        img_fundo = PhotoImage(file="imagens\\tela_tecnicos.png")
+        img_voltar = PhotoImage(file="imagens\\bot_return.png")
+
+
+        lab_fundo = Label(frame1, image=img_fundo)
+        lab_fundo.pack()
+
+        bot_return = Button(frame1, image=img_voltar, command=self.tela_inicial)
+        bot_return.place(width=150, height=50, x=564, y=221)
+        self.master.mainloop()
+
+
+
+
+Aplication()
