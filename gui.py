@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 import posiciona
 
 
@@ -47,6 +48,28 @@ class Aplication():
 
         lab_fundo = Label(frame1, image=img_fundo)
         lab_fundo.pack()
+
+        #Entry
+        entry_descricao = Entry(frame1)
+        entry_fabricante = Entry(frame1)
+        entry_part_nunber = Entry(frame1)
+        entry_tamanho = Entry(frame1)
+        entry_tipo = Entry(frame1)
+        entry_material = Entry(frame1)
+        entry_reserva_max = Entry(frame1)
+
+        entry_descricao.place(width=494, height=22, x=135, y=86)
+        entry_fabricante.place(width=211, height=22, x=134, y=119)
+        entry_part_nunber.place(width=148, height=22, x=480, y=119)
+        entry_tamanho.place(width=70, height=22, x=135, y=152)
+        entry_tipo.place(width=298, height=22, x=480, y=152)
+        entry_material.place(width=298, height=22, x=135, y=185)
+        entry_reserva_max.place(width=52, height=22, x=591, y=186)
+
+        #ComboBox:
+        lista_voltagens = [110, 220]
+        cb_voltagem = ttk.Combobox(frame1, values=lista_voltagens)
+        cb_voltagem.place(width=71, height=22, x=348, y=152)
 
         #botoes:
         bot_add = Button(frame1, image=img_add)
