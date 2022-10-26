@@ -50,24 +50,27 @@ class Aplication():
         lab_fundo.pack()
 
         #Entry
-        entry_descricao = Entry(frame1)
-        entry_fabricante = Entry(frame1)
-        entry_part_nunber = Entry(frame1)
-        entry_tamanho = Entry(frame1)
-        entry_tipo = Entry(frame1)
-        entry_material = Entry(frame1)
-        entry_reserva_max = Entry(frame1)
+        ent_descricao = Entry(frame1)
+        ent_fabricante = Entry(frame1)
+        ent_part_nunber = Entry(frame1)
+        ent_tamanho = Entry(frame1)
+        ent_tipo = Entry(frame1)
+        ent_material = Entry(frame1)
+        ent_reserva_max = Entry(frame1)
 
-        entry_descricao.place(width=494, height=22, x=135, y=86)
-        entry_fabricante.place(width=211, height=22, x=134, y=119)
-        entry_part_nunber.place(width=148, height=22, x=480, y=119)
-        entry_tamanho.place(width=70, height=22, x=135, y=152)
-        entry_tipo.place(width=298, height=22, x=480, y=152)
-        entry_material.place(width=298, height=22, x=135, y=185)
-        entry_reserva_max.place(width=52, height=22, x=591, y=186)
+        ent_descricao.place(width=494, height=22, x=135, y=86)
+        ent_fabricante.place(width=211, height=22, x=134, y=119)
+        ent_part_nunber.place(width=148, height=22, x=480, y=119)
+        ent_tamanho.place(width=70, height=22, x=135, y=152)
+        ent_tipo.place(width=298, height=22, x=480, y=152)
+        ent_material.place(width=298, height=22, x=135, y=185)
+        ent_reserva_max.place(width=52, height=22, x=591, y=186)
 
         #ComboBox:
         lista_voltagens = [110, 220]
+        lista_un_medida = ["cm", "m", "mm", "pol"]
+        cb_un_medida = ttk.Combobox(frame1, values=lista_un_medida)
+        cb_un_medida.place(width=40, height=22, x=213, y=152)
         cb_voltagem = ttk.Combobox(frame1, values=lista_voltagens)
         cb_voltagem.place(width=71, height=22, x=348, y=152)
 
@@ -93,6 +96,22 @@ class Aplication():
 
         lab_fundo = Label(frame1, image=img_fundo)
         lab_fundo.pack()
+
+        #Entry:
+        ent_nome = Entry(frame1)
+        ent_cpf = Entry(frame1)
+        ent_tel = Entry(frame1)
+        ent_equipe = Entry(frame1)
+
+        ent_nome.place(width=441, height=22, x=184, y=87)
+        ent_cpf.place(width=269, height=22, x=184, y=118)
+        ent_tel.place(width=269, height=23, x=184, y=150)
+        ent_equipe.place(width=168, height=21, x=455, y=185)
+
+        #ComboBox:
+        lista_turnos = ["MANHÃ", "TARDE", "NOITE"]
+        cb_turnos = ttk.Combobox(frame1, values=lista_turnos)
+        cb_turnos.place(width=148, height=22, x=184, y=185)
 
         #botoes:
         bot_add = Button(frame1, image=img_add)
