@@ -3,16 +3,28 @@ from tkinter import ttk
 import posiciona
 
 
-class Aplication():
+class Validacao():
+    def validanumero(self, entrada):
+        if entrada == "": return True
+        try:
+            value = int(entrada)
+        except ValueError:
+            return False
+        return 0 <= value
+
+class Aplication(Validacao):
     def __init__(self):
         self.master = Tk()
         self.master.bind('<Button-1>', posiciona.inicio_place)
         self.master.bind('<ButtonRelease-1>', lambda arg: posiciona.fim_place(arg, self.master))
         self.master.bind('<Button-2>', lambda arg: posiciona.para_geometry(self.master))
-
+        self.valida_entrada_int()
         self.master.geometry("800x600")
         self.master.resizable(False, False)
         self.tela_inicial()
+
+    def valida_entrada_int(self):
+        self.validacaonumerica = (self.master.register(self.validanumero), "%P")
 
     def tela_inicial(self):
         #Archives Imports:
@@ -53,7 +65,7 @@ class Aplication():
         ent_descricao = Entry(frame1)
         ent_fabricante = Entry(frame1)
         ent_part_nunber = Entry(frame1)
-        ent_tamanho = Entry(frame1)
+        ent_tamanho = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
         ent_tipo = Entry(frame1)
         ent_material = Entry(frame1)
         ent_reserva_max = Entry(frame1)
@@ -122,6 +134,7 @@ class Aplication():
         bot_return = Button(frame1, image=img_voltar, command=self.tela_inicial)
         bot_return.place(width=150, height=50, x=564, y=221)
         self.master.mainloop()
+
 
 
 
