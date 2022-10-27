@@ -12,6 +12,7 @@ class Validacao():
             return False
         return 0 <= value
 
+
 class Aplication(Validacao):
     def __init__(self):
         self.master = Tk()
@@ -64,11 +65,11 @@ class Aplication(Validacao):
         #Entry
         ent_descricao = Entry(frame1)
         ent_fabricante = Entry(frame1)
-        ent_part_nunber = Entry(frame1)
+        ent_part_nunber = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
         ent_tamanho = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
         ent_tipo = Entry(frame1)
         ent_material = Entry(frame1)
-        ent_reserva_max = Entry(frame1)
+        ent_reserva_max = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
 
         ent_descricao.place(width=494, height=22, x=135, y=86)
         ent_fabricante.place(width=211, height=22, x=134, y=119)
@@ -111,8 +112,8 @@ class Aplication(Validacao):
 
         #Entry:
         ent_nome = Entry(frame1)
-        ent_cpf = Entry(frame1)
-        ent_tel = Entry(frame1)
+        ent_cpf = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
+        ent_tel = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
         ent_equipe = Entry(frame1)
 
         ent_nome.place(width=441, height=22, x=184, y=87)
