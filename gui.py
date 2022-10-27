@@ -3,7 +3,7 @@ from tkinter import ttk
 import posiciona
 
 
-class Validacao():
+class Validacao:
     def validanumero(self, entrada):
         if entrada == "": return True
         try:
@@ -111,10 +111,10 @@ class Aplication(Validacao):
         lab_fundo.pack()
 
         #Entry:
-        ent_nome = Entry(frame1)
-        ent_cpf = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
-        ent_tel = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
-        ent_equipe = Entry(frame1)
+        self.ent_nome = Entry(frame1)
+        self.ent_cpf = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
+        self.ent_tel = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
+        self.ent_equipe = Entry(frame1)
 
         ent_nome.place(width=441, height=22, x=184, y=87)
         ent_cpf.place(width=269, height=22, x=184, y=118)
