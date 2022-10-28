@@ -12,6 +12,12 @@ class DBtecnicos:
         self.df_tecnicos.to_excel("funcionarios.xlsx", index=False) #aqui sobrescrevo o arquivo excel
         print(f'Técnico {lista_dados[1]} cadastrado com sucesso!')
 
+    def remove_tec(self, cpf):
+
+        self.df_tecnicos.drop(self.df_tecnicos.index[self.df_tecnicos["cpf"] == cpf].tolist(), inplace=True)
+        self.df_tecnicos.reset_index(drop=True, inplace=True)
+        self.df_tecnicos.to_excel("funcionarios.xlsx", index=False)
+
     @property
     def linhas(self):
         lista_linhas = []

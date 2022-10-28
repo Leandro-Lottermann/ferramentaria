@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import ttk
 import posiciona
 from funcional import *
+from tkinter import messagebox
+
 
 class Validacao:
     def validanumero(self, entrada):
@@ -23,7 +25,6 @@ class Aplication(Validacao):
         self.valida_entrada_int()
         self.master.geometry("800x600")
         self.master.resizable(False, False)
-        self.bancotecnicos = DBtecnicos()
         self.tela_inicial()
 
     def valida_entrada_int(self):
@@ -101,6 +102,7 @@ class Aplication(Validacao):
         self.master.mainloop()
 
     def tela_tecnico(self):
+        self.bancotecnicos = DBtecnicos()
         frame1 = Frame(self.master)
         frame1.place(relx=0, rely=0, relwidth=1, relheight=1)
         #carregamento das iagens:
@@ -148,20 +150,29 @@ class Aplication(Validacao):
         #botoes:
         bot_add = Button(frame1, image=img_add, command= lambda: self.add_tecnico(ent_cpf.get(), ent_nome.get(), ent_tel.get(), cb_turnos.get(), ent_equipe.get()))
         bot_add.place(width=50, height=50, x=134, y=221)
-        bot_del = Button(frame1, image=img_del)
+        bot_del = Button(frame1, image=img_del, command= lambda : self.del_tecnico(tv.item(tv.selection()[0], "values"))) #sem o 0 retorna uma string do indice no tv
         bot_del.place(width=50, height=50, x=202, y=221)
 
         bot_return = Button(frame1, image=img_voltar, command=self.tela_inicial)
         bot_return.place(width=150, height=50, x=564, y=221)
 
-        print(self.bancotecnicos.linhas)
+
 
         self.master.mainloop()
     def add_tecnico(self,cpf, nome, telefone, turno, equipe):
-        listadados = (cpf, nome, telefone, turno, equipe)
-        self.bancotecnicos.add_novo_tec(listadados)
-        self.tela_tecnico()
+        if cpf == "" or nome == "" or telefone == "" or turno == "" or equipe == "":
+            messagebox.showerror("ERRO", "Não foi possível adicionar!")
+        else:
+            listadados = (cpf, nome, telefone, turno, equipe)
+            self.bancotecnicos.add_novo_tec(listadados)
+
+            self.tela_tecnico()
 
     def inserta_dados_tv(self, tv):
-        for (cpf, nome, telefone, turno, equipe) in self.bancotecnicos.linhas:
+        for (cpf, nome, telefone, turno, equipe) in self.bancotecnicos.linhas: #Cada elemento já um item da lista, aqui estou separando as colunas
             tv.insert("", "end", values= (cpf, nome, telefone, turno, equipe))
+
+    def del_tecnico(self, selecionado):
+        self.bancotecnicos.remove_tec(int(selecionado[0]))
+
+        self.tela_tecnico()
