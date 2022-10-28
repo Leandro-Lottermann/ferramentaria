@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import posiciona
-
+from funcional import *
 
 class Validacao:
     def validanumero(self, entrada):
@@ -15,6 +15,7 @@ class Validacao:
 
 class Aplication(Validacao):
     def __init__(self):
+        self.bancotecnicos = DBtecnicos()
         self.master = Tk()
         self.master.bind('<Button-1>', posiciona.inicio_place)
         self.master.bind('<ButtonRelease-1>', lambda arg: posiciona.fim_place(arg, self.master))
@@ -22,6 +23,7 @@ class Aplication(Validacao):
         self.valida_entrada_int()
         self.master.geometry("800x600")
         self.master.resizable(False, False)
+        self.bancotecnicos = DBtecnicos()
         self.tela_inicial()
 
     def valida_entrada_int(self):
@@ -111,10 +113,10 @@ class Aplication(Validacao):
         lab_fundo.pack()
 
         #Entry:
-        self.ent_nome = Entry(frame1)
-        self.ent_cpf = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
-        self.ent_tel = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
-        self.ent_equipe = Entry(frame1)
+        ent_nome = Entry(frame1)
+        ent_cpf = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
+        ent_tel = Entry(frame1, validate="key", validatecommand=self.validacaonumerica)
+        ent_equipe = Entry(frame1)
 
         ent_nome.place(width=441, height=22, x=184, y=87)
         ent_cpf.place(width=269, height=22, x=184, y=118)
@@ -127,7 +129,7 @@ class Aplication(Validacao):
         cb_turnos.place(width=148, height=22, x=184, y=185)
 
         #botoes:
-        bot_add = Button(frame1, image=img_add)
+        bot_add = Button(frame1, image=img_add, command= lambda: self.add_tecnico(ent_cpf.get(), ent_nome.get(), ent_tel.get(), cb_turnos.get(), ent_equipe.get()))
         bot_add.place(width=50, height=50, x=134, y=221)
         bot_del = Button(frame1, image=img_del)
         bot_del.place(width=50, height=50, x=202, y=221)
@@ -135,7 +137,8 @@ class Aplication(Validacao):
         bot_return = Button(frame1, image=img_voltar, command=self.tela_inicial)
         bot_return.place(width=150, height=50, x=564, y=221)
         self.master.mainloop()
-
-
+    def add_tecnico(self,cpf, nome, telefone, turno, equipe):
+        listadados = (cpf, nome, telefone, turno, equipe)
+        self.bancotecnicos.add_novo_tec(listadados)
 
 
