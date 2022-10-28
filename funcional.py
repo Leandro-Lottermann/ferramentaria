@@ -8,10 +8,16 @@ class DBtecnicos:
 
     def add_novo_tec(self, lista_dados):
         dataframe = pd.DataFrame([lista_dados], columns=["cpf", "nome", "telefone", "turno", "equipe"]) #crio um dataframe com a tupla recebida
-        df_temp = pd.concat([self.df_tecnicos, dataframe], ignore_index=True) #concateno com o dataframe do banco de dados garando um temporário
-        df_temp.to_excel("funcionarios.xlsx", index=False) #aqui sobrescrevo o arquivo excel
+        self.df_tecnicos = pd.concat([self.df_tecnicos, dataframe], ignore_index=True) #concateno com o dataframe do banco de dados garando um temporário
+        self.df_tecnicos.to_excel("funcionarios.xlsx", index=False) #aqui sobrescrevo o arquivo excel
         print(f'Técnico {lista_dados[1]} cadastrado com sucesso!')
 
+    @property
+    def linhas(self):
+        lista_linhas = []
+        for linha in self.df_tecnicos.itertuples():
+            lista_linhas.append([linha.cpf, linha.nome, linha.telefone, linha.turno, linha.equipe])
+        return lista_linhas
 
 
 

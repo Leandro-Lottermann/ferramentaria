@@ -128,6 +128,23 @@ class Aplication(Validacao):
         cb_turnos = ttk.Combobox(frame1, values=lista_turnos)
         cb_turnos.place(width=148, height=22, x=184, y=185)
 
+        #treeview:
+        tv = ttk.Treeview(frame1, columns= ("cpf", "nome", "telefone", "turno", "equipe"), show= "headings")
+
+        tv.column("cpf", minwidth=0, width=60)
+        tv.column("nome", minwidth=0, width=80)
+        tv.column("telefone", minwidth=0, width=50)
+        tv.column("turno", minwidth=0, width=25)
+        tv.column("equipe", minwidth=0, width=25)
+
+        tv.heading("cpf", text="CPF")
+        tv.heading("nome", text="TÉCNICO")
+        tv.heading("telefone", text="CONTATO")
+        tv.heading("turno", text="TURNO")
+        tv.heading("equipe", text="EQUIPE")
+        self.inserta_dados_tv(tv)
+        tv.place(width=751, height=293, x=24, y=280)
+
         #botoes:
         bot_add = Button(frame1, image=img_add, command= lambda: self.add_tecnico(ent_cpf.get(), ent_nome.get(), ent_tel.get(), cb_turnos.get(), ent_equipe.get()))
         bot_add.place(width=50, height=50, x=134, y=221)
@@ -136,9 +153,15 @@ class Aplication(Validacao):
 
         bot_return = Button(frame1, image=img_voltar, command=self.tela_inicial)
         bot_return.place(width=150, height=50, x=564, y=221)
+
+        print(self.bancotecnicos.linhas)
+
         self.master.mainloop()
     def add_tecnico(self,cpf, nome, telefone, turno, equipe):
         listadados = (cpf, nome, telefone, turno, equipe)
         self.bancotecnicos.add_novo_tec(listadados)
+        self.tela_tecnico()
 
-
+    def inserta_dados_tv(self, tv):
+        for (cpf, nome, telefone, turno, equipe) in self.bancotecnicos.linhas:
+            tv.insert("", "end", values= (cpf, nome, telefone, turno, equipe))
