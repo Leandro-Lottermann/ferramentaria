@@ -17,6 +17,7 @@ class DBtecnicos:
         self.df_tecnicos.reset_index(drop=True, inplace=True)
         self.df_tecnicos.to_excel("funcionarios.xlsx", index=False)
 
+
     @property
     def linhas(self):
         lista_linhas = []
@@ -25,8 +26,28 @@ class DBtecnicos:
         return lista_linhas
 
 
-"""class DBferramentas:
+class DBferramentas:
     def __init__(self):
-        self.df_ferramentas = """
+        self.df_ferramentas = pd.read_excel("ferramentas.xlsx", engine="openpyxl")
+
+    def add_nova_fer(self, lista_dados):
+        dataframe = pd.DataFrame([lista_dados], columns=["ferramenta", "fabricante", "pnumber", "tamanho", "unm", "voltagem", "tipo", "material", "resmax"])
+        self.df_ferramentas = pd.concat([self.df_ferramentas, dataframe], ignore_index=True)
+        self.df_ferramentas.to_excel("ferramentas.xlsx", index=False)
+        print(f'Ferramenta {lista_dados} cadastrado com sucesso!')
+
+
+    def remove_fer(self, pnumber):
+
+        self.df_ferramentas.drop(self.df_ferramentas.index[self.df_ferramentas["pnumber"] == pnumber].tolist(), inplace=True)
+        self.df_ferramentas.reset_index(drop=True, inplace=True)
+        self.df_ferramentas.to_excel("ferramentas.xlsx", index=False)
+
+    @property
+    def linhas(self):
+        lista_linhas = []
+        for linha in self.df_ferramentas.itertuples():
+            lista_linhas.append([linha.ferramenta, linha.fabricante, linha.pnumber, linha.tamanho, linha.unm, linha.voltagem, linha.tipo, linha.material, linha.resmax])
+        return lista_linhas
 
 
