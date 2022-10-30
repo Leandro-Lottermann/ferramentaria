@@ -54,6 +54,7 @@ class Aplication(Validacao):
         self.master.mainloop()
 
     def tela_ferramenta(self):
+        #self.bacoferramentas = DBferramentas()
         frame1 = Frame(self.master)
         frame1.place(relx=0, rely=0, relwidth=1, relheight=1)
         #carregamento das iagens:

@@ -1,7 +1,6 @@
-# Aqui virá a interação com o DB e funcionalidades gerais do app.
 import pandas as pd
 
-#trocar esse objeto por um objeto data frame
+
 class DBtecnicos:
     def __init__(self):
         self.df_tecnicos = pd.read_excel("funcionarios.xlsx", engine= "openpyxl") #abre arquivo
@@ -26,6 +25,8 @@ class DBtecnicos:
         return lista_linhas
 
 
-
+"""class DBferramentas:
+    def __init__(self):
+        self.df_ferramentas = """
 
 
