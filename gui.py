@@ -219,7 +219,7 @@ class Aplication(Validacao):
         if ferramenta == "" or fabricante == "" or pnumber == "" or tamanho == "" or unm == "" or voltagem == "" or tipo == "" or material == "" or resmax == "":
             messagebox.showerror("ERRO", "Não foi possível adicionar!")
         else:
-            listadados = (ferramenta, fabricante, pnumber, tamanho, unm, voltagem, tipo, material, resmax)
+            listadados = (ferramenta, fabricante, int(pnumber), float(tamanho), unm, voltagem, tipo, material, int(resmax))
             self.bacoferramentas.add_nova_fer(listadados)
 
             self.tela_ferramenta()
