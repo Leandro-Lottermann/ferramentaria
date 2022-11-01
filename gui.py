@@ -186,6 +186,11 @@ class Aplication(Validacao):
 
 
         self.master.mainloop()
+
+    def tela_reserva(self):
+        frame1 = Frame(self.master)
+        frame1.place(relx=0, rely=0, relwidth=1, relheight=1)
+
     def add_tecnico(self,cpf, nome, telefone, turno, equipe):
         if cpf == "" or nome == "" or telefone == "" or turno == "" or equipe == "":
             messagebox.showerror("ERRO", "Não foi possível adicionar!")

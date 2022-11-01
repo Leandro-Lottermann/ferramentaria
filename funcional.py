@@ -26,7 +26,11 @@ class DBtecnicos:
         return lista_linhas
 
 
-class DBferramentas:
+class Reserva:
+    pass
+
+
+class DBferramentas(Reserva):
     def __init__(self):
         self.df_ferramentas = pd.read_excel("ferramentas.xlsx", engine="openpyxl")
 
