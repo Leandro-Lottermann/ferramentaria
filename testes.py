@@ -1,7 +1,24 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import pandas as pd
 
+data_hoje = datetime.now()
+
+for d in range(0, 30, 1): # usar isso para geras as colunas do dataframe
+    dias = timedelta(d)
+    data = data_hoje + dias
+    print(data)
+
+
+
+
+
+
+
+
+
+#no inicio criar uma lista com os parnumbers
 df_ferramentas = pd.read_excel("teste.xlsx", engine="openpyxl")
+
 df_1 = pd.read_excel("funcionarios.xlsx", engine= "openpyxl")
 writer = pd.ExcelWriter("teste.xlsx", engine="openpyxl")
 df_ferramentas.to_excel(writer, sheet_name="abinha", index=False)
