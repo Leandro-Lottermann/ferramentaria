@@ -2,8 +2,11 @@ from datetime import datetime
 import pandas as pd
 
 df_ferramentas = pd.read_excel("teste.xlsx", engine="openpyxl")
-
-print(df_ferramentas)
+df_1 = pd.read_excel("funcionarios.xlsx", engine= "openpyxl")
+writer = pd.ExcelWriter("teste.xlsx", engine="openpyxl")
+df_ferramentas.to_excel(writer, sheet_name="abinha", index=False)
+df_1.to_excel(writer, sheet_name="deu certooo", index=False)
+writer.close()
 hoje = datetime.now()
 print(format(hoje, "%d/%m/%Y"))
 def ideia():
