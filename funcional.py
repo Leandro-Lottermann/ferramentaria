@@ -32,21 +32,29 @@ class Reserva:
 
 class DBferramentas(Reserva):
     def __init__(self):
-        self.df_ferramentas = pd.read_excel("ferramentas.xlsx", engine="openpyxl")
+        self.df_ferramentas = pd.read_excel("ferramentas.xlsx", engine="openpyxl", sheet_name="cadastro")
 
     def add_nova_fer(self, lista_dados):
         dataframe = pd.DataFrame([lista_dados], columns=["ferramenta", "fabricante", "pnumber", "tamanho", "unm", "voltagem", "tipo", "material", "resmax"])
         self.df_ferramentas = pd.concat([self.df_ferramentas, dataframe], ignore_index=True)
-        self.df_ferramentas.to_excel("ferramentas.xlsx", index=False)
+        self.df_ferramentas.to_excel("ferramentas.xlsx", index=False, sheet_name="cadastro")
         print(f'Ferramenta {lista_dados} cadastrado com sucesso!')
+        self.cria_aba(str(lista_dados[2]))
 
 
     def remove_fer(self, pnumber):
 
         self.df_ferramentas.drop(self.df_ferramentas.index[self.df_ferramentas["pnumber"] == pnumber].tolist(), inplace=True)
         self.df_ferramentas.reset_index(drop=True, inplace=True)
-        self.df_ferramentas.to_excel("ferramentas.xlsx", index=False)
+        self.df_ferramentas.to_excel("ferramentas.xlsx", index=False, sheet_name="cadastro")
 
+    def cria_aba(self, id):
+        print(id)
+        df = pd.DataFrame([id], columns=["id"])
+        writer = pd.ExcelWriter("ferramentas.xlsx", engine="openpyxl") #aque ele sempre sobrescreve o 2, deveria criar um txt que guardasse o Id e depois iterar sobre para criar os to excel
+        self.df_ferramentas.to_excel(writer, sheet_name="cadastro")
+        df.to_excel(writer, sheet_name=id)
+        writer.close()
     @property
     def linhas(self):
         lista_linhas = []

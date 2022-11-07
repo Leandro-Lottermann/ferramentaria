@@ -17,15 +17,13 @@ for d in range(0, 30, 1): # usar isso para geras as colunas do dataframe
 
 
 #no inicio criar uma lista com os parnumbers
-df_ferramentas = pd.read_excel("teste.xlsx", engine="openpyxl")
 
 df_1 = pd.read_excel("funcionarios.xlsx", engine= "openpyxl")
 writer = pd.ExcelWriter("teste.xlsx", engine="openpyxl")
-df_ferramentas.to_excel(writer, sheet_name="abinha", index=False)
-df_1.to_excel(writer, sheet_name="deu certooo", index=False)
+df_1.to_excel(writer, sheet_name="deu certooo3", index=False)
 writer.close()
-hoje = datetime.now()
-print(format(hoje, "%d/%m/%Y"))
+#hoje = datetime.now()
+#print(format(hoje, "%d/%m/%Y"))
 def ideia():
     lista_horas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 
